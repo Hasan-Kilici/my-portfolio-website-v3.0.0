@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <% theme.forEach( theme => { %>
+      <div class="card">
+        <div class="card-body">
+          <h5><%= theme.name %></h5>
+          <li>Arkaplan : <%= theme.background %></li>
+          <li>Yazı rengi : <%= theme.textcolor %></li>
+          <li>Banner arkaplanı : <%= theme.bannerbg %></li>
+        </div>
+        <div class="card-footer">
+          <div class="row justify-content-center">
+          <form class="col-6" method="POST" action="/theme/remove/<%= theme._id %>">
+            <input type="submit" class="btn btn-danger col-12" value="sil">
+          </form>
+          <form method="POST" class="col-6" action="/use/theme/<%= theme._id %>/<%= pageId %> ">
+            <input type="submit" class="btn btn-dark col-12" value="Kullan">
+          </form>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
