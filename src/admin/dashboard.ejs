@@ -1,0 +1,76 @@
+<%- include("../partials/head") %>
+<%- include("../partials/adminnavbar") %>
+<div class="container"><br>
+<h4>Proje Ekle</h4>
+<hr>
+<div class="card">
+  <div class="card-body">
+  <form method="POST" enctype="multipart/form-data" action="/add/project">
+  <label>Başlık</label>
+  <input type="text" id="title" name="title" class="form-control">
+   <label>Açıklama</label>
+  <textarea id="description" name="description" class="form-control w-100"></textarea>
+    <label>Proje URLsi</label>
+     <input type="text" id="url" name="url" class="form-control">
+      <label>Fotoğraf</label>
+       <input class="form-control" type="file" class="form-control-file" name="uploaded_file"><br> 
+     <input type="submit" class="btn btn-dark" value="Gönder">
+    </form>
+  </div> 
+</div> 
+<br>
+<h4>Blog ekle</h4>
+<hr>
+<div class="card">
+<div class="card-body">
+<form method="POST" enctype="multipart/form-data" action="/add/blog">
+  <label>Başlık</label>
+  <input type="text" id="title" name="title" class="form-control">
+    <label>Kısa açıklama</label>
+  <input type="text" id="short" name="short" class="form-control">
+   <label>Açıklama</label>
+  <textarea id="description" name="description" class="form-control w-100"></textarea>
+    <label>URL</label>
+     <input type="text" id="url" name="url" class="form-control">
+      <label>Fotoğraf</label>
+       <input class="form-control" type="file" class="form-control-file" name="uploaded_file"><br> 
+     <input type="submit" class="btn btn-dark" value="Gönder">  
+</form>
+</div>  
+</div><br>
+<h4>İstatistiğe Dil ekle</h4>
+<hr>
+  <div class="card">
+<div class="card-body">
+<form method="POST" enctype="multipart/form-data" action="/add/stats">
+  <label>Dil</label>
+  <input type="text" id="lang" name="lang" class="form-control">
+    <label>Yüzde</label>
+  <input type="number" id="level" name="level" class="form-control" min="1" max="100">
+   <label>Açıklama</label>
+  <input type="color" id="color" name="color" class="form-control ">
+      <label>Logo</label>
+       <input class="form-control" type="file" class="form-control-file" name="uploaded_file"><br> 
+     <input type="submit" class="btn btn-dark" value="Gönder">  
+</form>
+</div>  
+</div>
+<h4>Tema ekle</h4>
+<div class="card">
+  <div class="card-body">
+    <form method="POST" action="/add/theme">
+      <label>Arkaplan</label>
+      <input type="color" class="form-control" name="background" id="background">
+      <label>Yazı rengi</label>
+      <input type="color" class="form-control" name="textcolor" id="textcolor">
+      <label>Banner arkaplan</label>
+      <input type="color" class="form-control" name="bannerbg" id="bannerbg"><br>
+      <input type="submit" class="btn btn-dark" value="Ekle">
+    </form>
+  </div>
+</div>
+  
+<%- include("../partials/adminprojects") %>
+<%- include("../partials/adminblogs") %>
+<%- include("../partials/adminthemes") %>
+  </div>
