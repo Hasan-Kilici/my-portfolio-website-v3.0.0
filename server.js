@@ -176,6 +176,7 @@ app.get("/login", (req, res) => {
 app.get("/admin/dashboard/", (req, res) => {
   let token = req.cookies.token;
   Users.findOne({ token: token }).then((userResult) => {
+  Page.findById(process.env.pageId).then((pageResult) => {
     if (userResult.admin == "true") {
       Projects.find()
         .sort({ createdAt: -1 })
@@ -196,7 +197,8 @@ app.get("/admin/dashboard/", (req, res) => {
                     blog: blogResult,
                     stats: statsResult,
                     theme: themeResult,
-                    pageId: process.env.pageId
+                    pageId: process.env.pageId,
+                    page: pageResult,
                   });
                 });
               });
@@ -207,7 +209,8 @@ app.get("/admin/dashboard/", (req, res) => {
         });
     } else {
       res.redirect("/");
-    }
+     }
+   });
   });
 });
 //Forms
@@ -265,6 +268,7 @@ app.get("/s/:url/:token", (req, res) => {
     BlogsParts.find({ blogToken: blogToken })
       .sort()
       .then((partsResult) => {
+       Page.findById(process.env.pageId).then((pageResult) => {
         if (userToken != null) {
           Users.findOne({ token: userToken }).then((userResult) => {
             res.render(`${__dirname}/src/user/blog.ejs`, {
@@ -272,6 +276,7 @@ app.get("/s/:url/:token", (req, res) => {
               parts: partsResult,
               user: userResult,
               title: blogResult.title,
+              page: pageResult,
             });
           });
         } else {
@@ -279,9 +284,11 @@ app.get("/s/:url/:token", (req, res) => {
             title: blogResult.title,
             blog: blogResult,
             parts: partsResult,
+            page: pageResult,
           });
         }
       });
+    });
   });
 });
 //Admin blog page
@@ -289,6 +296,7 @@ app.get("/admin/:url/:token", (req, res) => {
   let blogToken = req.params.token;
   let userToken = req.cookies.token;
   Users.findOne({ token: userToken }).then((userResult) => {
+    Page.findById(process.env.pageId).then((pageResult) => {
     if (userResult.admin == "true") {
       Blogs.findOne({ token: blogToken }).then((blogResult) => {
         BlogsParts.find({ blogToken: blogToken })
@@ -299,12 +307,14 @@ app.get("/admin/:url/:token", (req, res) => {
               parts: "partsResult",
               user: userResult,
               title: blogResult.title,
+              page: pageResult,
             });
           });
       });
     } else {
       res.redirect("/");
-    }
+     }
+   });
   });
 });
 //Add Blog
@@ -348,6 +358,7 @@ app.get("/edit/blog/:token", (req, res) => {
   let blogToken = req.params.token;
   let userToken = req.cookies.token;
   Users.findOne({ token: userToken }).then((userResult) => {
+  Page.findById(process.env.pageId).then((pageResult) => {
     if (userResult.admin == "true") {
       Blogs.findOne({ token: blogToken }).then((blogResult) => {
         BlogsParts.find({ blogToken: blogToken })
@@ -361,13 +372,15 @@ app.get("/edit/blog/:token", (req, res) => {
                   part: partResult,
                   blog: blogResult,
                   partCount: partCount,
+                  page: pageResult,
                 });
               });
           });
       });
     } else {
       res.redirect("/");
-    }
+     }
+   });
   });
 });
 //Form
