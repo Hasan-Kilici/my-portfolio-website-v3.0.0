@@ -1,0 +1,19 @@
+<div class="container"><br>
+<h4>My Stats</h4>
+<hr>
+<% stats.forEach(stats =>{ %>
+<div class="row align-items-start">
+<div style="width:5%;margin-right:1.2vw">
+<img src="/uploads/<%= stats.logo %>" style="width:30px;height:30px;border-radius:0;">
+</div>
+<div class="col-11">
+<label><%= stats.lang %></label>
+</div>
+</div>
+<div class="col-12 rounded" style="background-color:#eee">
+<div class="rounded" style="width:<%= stats.level %>%;background-color:<%= stats.color %>;color:white;padding:10px;margin-bottom:1.3vh;">
+<label><%= stats.level %>%</label>
+</div>
+</div>
+<% }) %>
+</div>
